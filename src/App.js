@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Synth, Player, Transport } from "tone";
 
+//play a middle 'C' for the duration of an 8th note
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <button
+                onClick={() => {
+                    // const synth = new Synth().toMaster();
+                    // synth.triggerAttackRelease("C4", "8n");
+                    //will play as soon as it's loaded
+                    // new Transport();
+                    //repeated event every 8th note
+                    Transport.scheduleRepeat(function(time) {
+                        //do something with the time
+                        console.log("-");
+
+                        var player = new Player({
+                            url: "./1.ogg",
+                            autostart: true
+                        }).toMaster();
+                    }, "2");
+
+                    Transport.start();
+                }}
+            >
+                Sound
+            </button>
+        </div>
+    );
 }
 
 export default App;
